@@ -1,9 +1,9 @@
 //Starting point of server
 
-var express = require("express");
-var http = require("http");
-var bodyParser = require("body-parser");
-var morgan = require("morgan");
+const express = require("express");
+const http = require("http");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const router = require("./router");
 const app = express();
