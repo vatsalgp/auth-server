@@ -17,8 +17,13 @@ mongoose.connect("mongodb://localhost:auth/auth", {
 
 //App Setup
 
+const corsOptions = {
+    origin: "https://auth-28.netlify.com", //No ending slash 
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 app.use(morgan("combined")); // For logging requests
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ type: "*/*" }));
 router(app);
 
