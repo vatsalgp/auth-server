@@ -1,14 +1,16 @@
 const passport = require("passport");
 const passportJwt = require("passport-jwt");
+const passportLocal = require("passport-local");
 const User = require("../models/user");
 const config = require("../config");
-const LocalStrategy = require("passport-local");
 
+const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
 
 //Create Local Strategy
-const localLogin = new LocalStrategy({ usernameField: "email" }, function (email, password, done) {
+const LocalLogin = new LocalStrategy({ usernameField: "email" }, function (email, password, done) {
+    console.log("REACHED HERE");
     User.findOne({ email }, function (err, user) {
         if (err)
             return done(err)
@@ -23,7 +25,6 @@ const localLogin = new LocalStrategy({ usernameField: "email" }, function (email
             else
                 return done(null, user);
         });
-
     })
 });
 
@@ -46,5 +47,5 @@ const JwtLogin = new JwtStrategy(JwtOptions, function (payload, done) {
 });
 
 //Use Strategy
+passport.use(LocalLogin);
 passport.use(JwtLogin);
-passport.use(localLogin);
