@@ -10,7 +10,6 @@ const ExtractJwt = passportJwt.ExtractJwt;
 
 //Create Local Strategy
 const LocalLogin = new LocalStrategy({ usernameField: "email" }, function (email, password, done) {
-    console.log("REACHED HERE");
     User.findOne({ email }, function (err, user) {
         if (err)
             return done(err)
